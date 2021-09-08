@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - Quake Coordinator
+
 final class QuakeCoordinator {
 
     // The coordinator uses the nav controller to manage the user interface.

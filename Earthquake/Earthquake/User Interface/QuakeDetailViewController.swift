@@ -8,6 +8,8 @@
 import MapKit
 import UIKit
 
+// MARK: - Quake Detail View Controller
+
 class QuakeDetailViewController: UIViewController {
 
     @IBOutlet weak var mapKitView: MKMapView!
@@ -23,7 +25,16 @@ class QuakeDetailViewController: UIViewController {
     weak var coordinator: QuakeCoordinator?
     var feature: Feature?
 
+}
+
+// MARK: - Configuration
+
+extension QuakeDetailViewController {
+
     func configure(feature: Feature?) {
+        // We keep the feature and complete the configuration of the
+        // UI when the view is about to appear. The view furniture is
+        // loaded lazily by UIKit, so it's not immediately available.
         self.feature = feature
     }
 

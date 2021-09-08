@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - Quake Settings Table View Cell
+
 class QuakeSettingsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var interiorView: UIView!
@@ -25,27 +27,33 @@ class QuakeSettingsTableViewCell: UITableViewCell {
         updateHistoricalRangeLabel()
     }
 
-    /// Annotates the range label with the selected number of hours.
-    func updateHistoricalRangeLabel() {
-        let hours = Int(historicalRangeSlider.value.rounded(.down))
-        historicalRangeLabel.text = "Historical Range (\(hours) hours)"
-    }
-
     @IBAction func minMagnitudeSliderChanged(_ sender: Any) {
         let magnitude = Double(minMagnitudeSlider.value)
         coordinator?.setMinimummMagnitude(magnitude)
         updateMinMagnitudeLabel()
     }
 
+    @IBAction func minMagnitudeSwitchChanged(_ sender: Any) {
+        coordinator?.setUseMinimumMagnitude(minMagnitudeSwitch.isOn)
+        updateMinMagnitudeSlider()
+    }
+
+    @IBAction func tappedRefresh(_ sender: Any) {
+        coordinator?.refreshQuakeList()
+    }
+
+    weak var coordinator: QuakeCoordinator?
+
+    /// Annotates the range label with the selected number of hours.
+    func updateHistoricalRangeLabel() {
+        let hours = Int(historicalRangeSlider.value.rounded(.down))
+        historicalRangeLabel.text = "Historical Range (\(hours) hours)"
+    }
+
     /// Annotates the magnitude label with the selected minimum.
     func updateMinMagnitudeLabel() {
         let value = Double(minMagnitudeSlider.value).to1dp
         minMagnitudeLabel.text = "Minimum Magnitude (\(value))"
-    }
-    
-    @IBAction func minMagnitudeSwitchChanged(_ sender: Any) {
-        coordinator?.setUseMinimumMagnitude(minMagnitudeSwitch.isOn)
-        updateMinMagnitudeSlider()
     }
 
     /// Styles the magnitude slider to clarify that it is unavailable if
@@ -58,16 +66,22 @@ class QuakeSettingsTableViewCell: UITableViewCell {
         minMagnitudeSlider.alpha = usingMagnitude ? 1.0 : 0.2
     }
 
-    @IBAction func tappedRefresh(_ sender: Any) {
-        coordinator?.refreshQuakeList()
-    }
+}
 
-    weak var coordinator: QuakeCoordinator?
+// MARK: - Manage Refresh Availability
+
+extension QuakeSettingsTableViewCell {
 
     func setRefreshEnabled(_ enabled: Bool) {
         refreshButton.isUserInteractionEnabled = enabled
         refreshButton.tintColor = enabled ? nil : .lightGray
     }
+
+}
+
+// MARK: - Configuration
+
+extension QuakeSettingsTableViewCell {
 
     func configure() {
         interiorView.layer.cornerRadius = 3.0
@@ -95,8 +109,7 @@ class QuakeSettingsTableViewCell: UITableViewCell {
         updateMinMagnitudeLabel()
 
         if let refreshEnabled = coordinator?.isRefreshEnabled {
-            refreshButton.isUserInteractionEnabled = refreshEnabled
-            refreshButton.tintColor = refreshEnabled ? nil : .lightGray
+            setRefreshEnabled(refreshEnabled)
         }
     }
     

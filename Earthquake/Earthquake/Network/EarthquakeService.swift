@@ -9,7 +9,9 @@ import Foundation
 
 // MARK: - Earthquake Service Completion
 
-typealias EarthquakeServiceCompletion = (Result<FeatureCollection, EarthquakeServiceError>) -> Void
+typealias EarthquakeServiceCompletion = (
+    Result<FeatureCollection, EarthquakeServiceError>
+) -> Void
 
 // MARK: - Earthquake Service
 
@@ -40,7 +42,10 @@ struct EarthquakeService {
         completion: @escaping EarthquakeServiceCompletion
     ) {
 
-        guard let url = url(startDate: startDate, minMagnitude: minMagnitude) else {
+        guard let url = url(
+                startDate: startDate,
+                minMagnitude: minMagnitude
+        ) else {
             // We could not make the URL. The choice here is to use the
             // completion handler to communicate this error. An alternative
             // would be to throw the error directly because we're not

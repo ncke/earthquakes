@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - Quake Summary Table View Cell
+
 class QuakeSummaryTableViewCell: UITableViewCell {
 
     @IBOutlet weak var interiorView: UIView!
@@ -20,6 +22,12 @@ class QuakeSummaryTableViewCell: UITableViewCell {
     weak var coordinator: QuakeCoordinator?
     var feature: Feature?
 
+}
+
+// MARK: - Configuration
+
+extension QuakeSummaryTableViewCell {
+
     func configure(feature: Feature?) {
         self.feature = feature
 
@@ -30,7 +38,9 @@ class QuakeSummaryTableViewCell: UITableViewCell {
         // maintain a cohesive design, and support dark mode. These
         // are mostly used in the storyboard but they're not as
         // obvious there.
-        interiorView.layer.borderColor = UIColor(named: "BorderColour")?.cgColor
+        interiorView.layer.borderColor = UIColor(
+            named: "BorderColour"
+        )?.cgColor
 
         // Configure the magnitude box.
         configureMagnitude(feature: feature)
@@ -63,7 +73,9 @@ class QuakeSummaryTableViewCell: UITableViewCell {
     func configureMagnitude(feature: Feature?) {
         magnitudeBox.layer.cornerRadius = 3.0
         magnitudeBox.layer.borderWidth = 2.0
-        magnitudeBox.layer.borderColor = UIColor(named: "BorderColour")?.cgColor
+        magnitudeBox.layer.borderColor = UIColor(
+            named: "BorderColour"
+        )?.cgColor
 
         guard
             let mag = feature?.properties.mag,

@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - Quake Nav Controller
+
 class QuakeNavController: UINavigationController {
 
     // I'm keeping the coordinator here because the nav controller is
@@ -29,7 +31,8 @@ class QuakeNavController: UINavigationController {
         // expected type, because that's the way UIKit does it. But there's
         // a little flexibility on that in this implementation anyway.
 
-        if let vc: QuakeTableViewController = self.viewControllers.firstAmong() {
+        if let vc: QuakeTableViewController = self.viewControllers.firstAmong()
+        {
             coordinator.setQuakeTableViewController(vc)
         }
 

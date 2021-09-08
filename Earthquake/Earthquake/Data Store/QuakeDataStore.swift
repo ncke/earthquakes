@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - Quake Data Store
+
 /// Provides a generic random-access in-memory data store for use within
 /// the application.
 class QuakeDataStore<Item> {

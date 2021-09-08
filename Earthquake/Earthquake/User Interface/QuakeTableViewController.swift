@@ -152,14 +152,16 @@ extension QuakeTableViewController {
         }
     }
 
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    override func tableView(
+        _ tableView: UITableView,
+        willSelectRowAt indexPath: IndexPath
+    ) -> IndexPath? {
         // We are only interested in selection of quake events.
         guard indexPath.section == 1 else {
             return nil
         }
 
         coordinator?.userRequestsDetail(featureIndex: indexPath.row)
-
         return nil
     }
 
