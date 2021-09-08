@@ -17,7 +17,7 @@ class QuakeNavController: UINavigationController {
         super.viewDidLoad()
 
         // The nav controller is instantiated from the storyboard as the
-        // initial view controller, and creates it's root view controller
+        // initial view controller, and creates its root view controller
         // as well. In other scenarios these elements could be created
         // programmatically, that would relax the dependency on the
         // lifecycle of the UIKit stuff. But for now, we use the
@@ -26,8 +26,8 @@ class QuakeNavController: UINavigationController {
         coordinator.setNavController(self)
 
         // At this stage we expect a single root view controller of the
-        // correct type, because that's the way UIKit does it. But there's
-        // a little flexibility on that in this implementation.
+        // expected type, because that's the way UIKit does it. But there's
+        // a little flexibility on that in this implementation anyway.
 
         if let vc: QuakeTableViewController = self.viewControllers.firstAmong() {
             coordinator.setQuakeTableViewController(vc)

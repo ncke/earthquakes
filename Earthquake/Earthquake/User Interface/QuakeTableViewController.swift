@@ -59,10 +59,10 @@ extension QuakeTableViewController {
     func setRefreshEnabled(_ enabled: Bool) {
         self.navigationItem.rightBarButtonItem?.isEnabled = enabled
 
-        // We need to tell the filter cell to update it's refresh
-        // too. It has a fixed index path. It's ok if the table view
-        // doesn't have a filter cell at the moment, it will be pick
-        // up the change next time it's dequeued and configured.
+        // We need to tell the filter cell to update its refresh button
+        // too. The cell has a fixed index path. It's ok if the table view
+        // doesn't have a filter cell at the moment, it will pick
+        // up the change the next time it's dequeued and configured.
         let filterPath = IndexPath(row: 0, section: 0)
         if let filterCell = tableView.cellForRow(
                 at: filterPath
@@ -152,18 +152,6 @@ extension QuakeTableViewController {
         }
     }
 
-    override func tableView(
-        _ tableView: UITableView,
-        didSelectRowAt indexPath: IndexPath
-    ) {
-        // We are only interested in selection of quake events.
-        guard indexPath.section == 1 else {
-            return
-        }
-
-        coordinator?.userRequestsDetail(featureIndex: indexPath.row)
-    }
-
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         // We are only interested in selection of quake events.
         guard indexPath.section == 1 else {
@@ -174,12 +162,5 @@ extension QuakeTableViewController {
 
         return nil
     }
-
-//    override func tableView(
-//        _ tableView: UITableView,
-//        shouldHighlightRowAt indexPath: IndexPath
-//    ) -> Bool {
-//        return false
-//    }
 
 }

@@ -15,12 +15,12 @@ typealias EarthquakeServiceCompletion = (Result<FeatureCollection, EarthquakeSer
 
 struct EarthquakeService {
 
-    // The escaping annotation denotes that the closure will be retained
+    // Nb: The @escaping annotation denotes that the closure will be retained
     // after the function has returned (in this case it is captured by the
     // data task's completion block).
 
-    // For large interfaces, it's useful to provide documentation inline
-    // with the code using multi-line documentation comments.
+    // For larger interfaces, we can provide more documentation inline
+    // with the code by using multi-line documentation comments.
 
     /**
      Queries the USGS earthquake service for a collection of events.
@@ -44,7 +44,8 @@ struct EarthquakeService {
             // We could not make the URL. The choice here is to use the
             // completion handler to communicate this error. An alternative
             // would be to throw the error directly because we're not
-            // async yet. Using the completion handler for this might
+            // async yet so we still have the call stack available to
+            // propagate the error. Using the completion handler for this may
             // surprise the caller and there could be nuances if the
             // caller has assumed that the completion handler will definitely
             // be called only after the function has returned. But the

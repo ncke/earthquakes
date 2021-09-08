@@ -42,6 +42,8 @@ class Feature: Codable {
     let properties: Properties
     let geometry: Geometry
 
+    // Coding keys can map property names during encoding
+    // or decoding.
     enum CodingKeys: String, CodingKey {
         case identifier = "id"
         case properties = "properties"
@@ -50,10 +52,10 @@ class Feature: Codable {
 
 }
 
-// We can use class extensions to provide additional computed properties.
-// Many callsites will have similar requirements so, as long as we stick
-// to the remit of a business object (and not UI), we can cater for
-// that here.
+// We can use class extensions to provide additional computed properties
+// and functions. Many callsites will have similar requirements so, as
+// long as we stick to the remit of a business object (and not UI), we can
+// cater for that here.
 
 // MARK: - Severity Categorisation
 
@@ -126,8 +128,8 @@ extension Feature {
             return nil
         }
 
-        let latString = lat < 0 ? "\(-lat.to2dp)°E" : "\(lat.to2dp)°W"
-        let lonString = lon < 0 ? "\(-lon.to2dp)°S" : "\(lon.to2dp)°N"
+        let latString = lat < 0 ? "\(-lat.to2dp)°S" : "\(lat.to2dp)°N"
+        let lonString = lon < 0 ? "\(-lon.to2dp)°W" : "\(lon.to2dp)°E"
         return latString + " " + lonString
     }
 
@@ -180,9 +182,7 @@ extension Feature {
     /// A human readable description of the elapsed time since the event,
     /// if known.
     var elapsedDescription: String? {
-        guard let elapsedTime = elapsedTime else {
-            return nil
-        }
+        guard let elapsedTime = elapsedTime else { return nil }
 
         /// Handle truncation and pluralisation of the unit.
         func format(_ value: Double, unit: String) -> String {
@@ -193,6 +193,8 @@ extension Feature {
             return formattedValue + " " + formattedUnit + " Ago"
         }
 
+        // Try to find an appropriate "... Ago" format.
+
         if elapsedTime < Feature.fiveMinutes {
             return "Now"
         } else if elapsedTime < Feature.oneHour {
@@ -200,6 +202,8 @@ extension Feature {
         } else if elapsedTime < Feature.halfDay {
             return format(elapsedTime / Feature.oneHour, unit: "Hour")
         }
+
+        //  Less recent dates are better presented with a day and time.
 
         guard let eventDate = eventDate else { return nil }
 

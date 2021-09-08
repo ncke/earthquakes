@@ -119,7 +119,7 @@ extension QuakeCoordinator {
 // MARK: - Feature Provider
 
 // Here the coordinator is conforming to the Feature Provider protocol, but
-// delegates that responsibility to the Feature Store on a method-by-method
+// delegates the responsibility to the Feature Store on a method-by-method
 // level. In more complex scenarios this means that the coordinator can
 // be more opinionated about the data that is coming back (e.g. noticing that
 // something is missing and therefore starting network activity -- or that
@@ -186,8 +186,8 @@ extension QuakeCoordinator {
         // service is user initiated because the user is going to be
         // waiting avidly for the result. We would expect the function to
         // return pretty quickly, but we are using a lock so there could
-        // be momentary delays. We don't hog the log (but we might in
-        // future) and table view latency is very noticeable to a user.
+        // be momentary delays. We don't hog the lock now, but we might in
+        // future, and table view latency is very noticeable to a user.
 
         DispatchQueue.global(qos: .userInitiated).async {
             self.refreshQuakeListAsync()
@@ -217,13 +217,13 @@ extension QuakeCoordinator {
             // This is useful here because there are two ways out of the
             // critical section (normal flow and the guard). An
             // alternative to extending the lock would be to implement
-            // a test-and-set helper encapsulate the details of
+            // a test-and-set helper to encapsulate the details of
             // concurrency separately from the business logic.
             networkActivityLock.unlock()
         }
 
         guard !isNetworkActive else {
-            // We're already networking, abandon the refresh.
+            // We're already networking, so abandon this request.
             return
         }
 
@@ -232,7 +232,7 @@ extension QuakeCoordinator {
 
         // End of the critical section.
 
-        // We've already blocked the double tap using the flag, but we need
+        // We've already prevented new requests using the flag, but we need
         // to tell the user interface (back on the main thread).
         DispatchQueue.main.async {
             self.quakeTableViewController?.setRefreshEnabled(false)

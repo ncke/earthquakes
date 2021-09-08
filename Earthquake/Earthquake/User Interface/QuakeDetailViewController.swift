@@ -41,13 +41,13 @@ class QuakeDetailViewController: UIViewController {
         self.typeLabel.text = feature?.properties.type?.capitalized ?? "–"
 
         if let mag = feature?.properties.mag {
-            self.magLabel.text = "M \(mag)"
+            self.magLabel.text = "M \(mag.to2dp)"
         } else {
             self.magLabel.text = "–"
         }
 
         if let depth = feature?.depth {
-            self.depthLabel.text = "\(depth) km"
+            self.depthLabel.text = "\(depth.to2dp) km"
         } else {
             self.depthLabel.text = "–"
         }

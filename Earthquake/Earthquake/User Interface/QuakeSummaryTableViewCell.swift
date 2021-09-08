@@ -85,7 +85,7 @@ class QuakeSummaryTableViewCell: UITableViewCell {
 
     func configureTypeLine(feature: Feature?) {
         guard var typeString = feature?.properties.type?.capitalized else {
-            typeLabel.text = "Unknown Event Type"
+            typeLabel.text = "Unknown event type"
             return
         }
 
