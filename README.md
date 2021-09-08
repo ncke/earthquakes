@@ -1,6 +1,8 @@
 # earthquakes
 An iOS demo app to show current earthquake activity.
 
+![image](https://github.com/ncke/earthquakes/blob/92889051b2ac86da3416318386172298339b95e7/fig-1.png)
+
 ## API
 The app uses the public USGS earthquake event service. More information about the API is here [https://earthquake.usgs.gov/fdsnws/event/1/].
 
