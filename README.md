@@ -5,7 +5,7 @@ Some screenshots from the app are included below.
 
 | Quake List & Filters | Quake Detail | Dark Mode |
 |------------|------------|------------|
-|![image](https://github.com/ncke/earthquakes/blob/92889051b2ac86da3416318386172298339b95e7/fig-1.png)|![image](https://github.com/ncke/earthquakes/blob/5e8118c98276812b067b92083d1e336d5200fdcf/fig-2.png)|![image](https://github.com/ncke/earthquakes/blob/5e8118c98276812b067b92083d1e336d5200fdcf/fig-3.png)|
+|![image](https://github.com/ncke/earthquakes/blob/36ed497734f67798f7f8f91e1eda9b11aae46f2d/Other/fig-1.png)|![image](https://github.com/ncke/earthquakes/blob/36ed497734f67798f7f8f91e1eda9b11aae46f2d/Other/fig-2.png)|![image](https://github.com/ncke/earthquakes/blob/36ed497734f67798f7f8f91e1eda9b11aae46f2d/Other/fig-3.png)|
 
 ## API
 The app uses the public USGS earthquake event service. More information about the API is here [https://earthquake.usgs.gov/fdsnws/event/1/].
